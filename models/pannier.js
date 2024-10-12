@@ -1,8 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const produits = require('./produits');
+"use strict";
+const { Model } = require("sequelize");
+const produits = require("./produits");
 module.exports = (sequelize, DataTypes) => {
   class Pannier extends Model {
     /**
@@ -12,21 +10,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.produits, {
-        foreignKey: 'id_produit', // Clé étrangère pour associer un produit
-        as: 'produits',
-        onDelete:"CASCADE"
-
+      this.hasMany(models.Produits, {
+        foreignKey: "id_produit", // Clé étrangère pour associer un produit
+        as: "produits",
+        onDelete: "CASCADE",
       });
-
     }
   }
-  Pannier.init({
-    id_pannier: DataTypes.INTEGER,
-    id_produit: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Pannier',
-  });
+  Pannier.init(
+    {
+      id_pannier: DataTypes.INTEGER,
+      id_produit: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Pannier",
+    }
+  );
   return Pannier;
 };

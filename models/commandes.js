@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Commandes extends Model {
     /**
@@ -11,33 +9,30 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.utilisateurs, {
-        foreignKey: 'id_utilisateur', // Clé étrangère pour associer un utilisateur
-        as: 'utilisateur',
-        onDelete:"CASCADE"
+      this.belongsTo(models.Utilisateur, {
+        foreignKey: "id_utilisateur", // Clé étrangère pour associer un utilisateur
+        as: "utilisateur",
+        onDelete: "CASCADE",
       });
 
-      this.hasMany(models.produits, {
-        foreignKey: 'id_produits', // Clé étrangère pour associer un produit
-        as: 'produits',
-        onDelete:"CASCADE"
-
+      this.hasMany(models.Produits, {
+        foreignKey: "id_produits", // Clé étrangère pour associer un produit
+        as: "produits",
+        onDelete: "CASCADE",
       });
-
-
-
-
-
     }
   }
-  Commandes.init({
-    id_commande: DataTypes.INTEGER,
-    id_utilisateur: DataTypes.INTEGER,
-    statut_commande: DataTypes.STRING,
-    date: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Commandes',
-  });
+  Commandes.init(
+    {
+      id_commande: DataTypes.INTEGER,
+      id_utilisateur: DataTypes.INTEGER,
+      statut_commande: DataTypes.STRING,
+      date: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "Commandes",
+    }
+  );
   return Commandes;
 };
